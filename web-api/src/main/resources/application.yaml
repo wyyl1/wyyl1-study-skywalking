@@ -1,0 +1,15 @@
+server.port: 9900
+
+spring:
+  application:
+    name: web-api
+
+dubbo:
+  consumer:
+    check: false
+    retries: -1
+    timeout: 10000
+  registry:
+    address: nacos://127.0.0.1:8848
+
+#
