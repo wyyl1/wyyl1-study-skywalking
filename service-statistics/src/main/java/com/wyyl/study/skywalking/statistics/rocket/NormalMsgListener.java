@@ -20,7 +20,7 @@ public class NormalMsgListener implements MessageListener {
 
     @Override
     public Action consume(Message message, ConsumeContext context) {
-        log.info("收到普通队列消息 {} {}", message.getTopic(), message.getTag());
+        log.info("收到普通队列消息111 {} {}", message.getTopic(), message.getTag());
         try {
             switch (message.getTag()) {
                 case RocketTag.GET_USER_BY_CACHE:
@@ -35,4 +35,5 @@ public class NormalMsgListener implements MessageListener {
         }
         return Action.CommitMessage;
     }
+
 }

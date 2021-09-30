@@ -2,7 +2,9 @@ package com.wyyl.study.skywalking.controller;
 
 import com.wyyl.study.skywalking.common.bean.UserDO;
 import com.wyyl.study.skywalking.common.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
+import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
 
     @Reference(version = "1.0.0")
@@ -23,7 +26,9 @@ public class UserController {
     public UserDO getUser(@PathVariable int id) {
         UserDO user = new UserDO();
         user.setId(id);
-        user.setName("名字");
+        String traceId = TraceContext.traceId();
+        user.setName("traceId=" + traceId);
+        log.info("traceId={}", traceId);
         return user;
     }
 
@@ -31,4 +36,5 @@ public class UserController {
     public UserDO getUserByCache(@PathVariable int id) {
         return userService.getByCache(id);
     }
+
 }
