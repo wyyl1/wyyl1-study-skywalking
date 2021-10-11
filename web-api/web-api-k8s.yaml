@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wyyl1-web-api
+spec:
+  selector:
+    matchLabels:
+      app: wyyl1-web-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: wyyl1-web-api
+    spec:
+      containers:
+        - name: wyyl1-web-api
+          image: registry.cn-hangzhou.aliyuncs.com/wyyl1/test-sw-web-api:1.0.0
+          ports:
+            - containerPort: 9900
